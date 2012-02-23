@@ -14,6 +14,7 @@ namespace RuntimeFactory
     {
         private static Type _recompiledType;
         private static readonly Type _concreteType;
+
         static Factory()
         {
             _concreteType = typeof (TConcrete);
@@ -49,7 +50,6 @@ namespace RuntimeFactory
                     Trace.WriteLine(ex);
                 }
             };
-
         }
 
         private static Type CompileCode(string filename, string className)
@@ -57,9 +57,9 @@ namespace RuntimeFactory
             var newClassName = String.Format("{0}_{1}", className, DateTime.Now.Ticks);
             var code = ReadCodeFile(filename);
 
-            code = ChangeConcreteClassName(code, className, newClassName);
-
             var syntaxTree = SyntaxTree.ParseCompilationUnit(code);
+
+            ChangeConcreteClassName(syntaxTree, className, newClassName);
 
             var references = new List<AssemblyFileReference>
                                  {
@@ -97,11 +97,18 @@ namespace RuntimeFactory
             }
         }
 
-        private static string ChangeConcreteClassName(string code, string className, string newClassName)
+        private static void ChangeConcreteClassName(SyntaxTree syntaxTree, string className, string newClassName)
         {
-            // Duuuurtty
-            return code.Replace(String.Format("class {0} :", className),
-                                string.Format("class {0} :", newClassName));
+            var classNode = syntaxTree.Root
+                                        .DescendentNodes()
+                                        .OfType<ClassDeclarationSyntax>()
+                                        .FirstOrDefault(n => n.Identifier.ValueText == className);
+
+            var idNode = classNode.DescendentNodes()
+                                    .OfType<IdentifierNameSyntax>()
+                                    .First();
+
+            classNode.ReplaceNode(idNode, Syntax.IdentifierName(newClassName));
         }
 
         private static string ReadCodeFile(string filename)
@@ -113,7 +120,6 @@ namespace RuntimeFactory
                     return reader.ReadToEnd();
                 }
             }
-
         }
     }
 }
