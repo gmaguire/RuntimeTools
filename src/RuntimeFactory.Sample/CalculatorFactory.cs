@@ -1,6 +1,4 @@
-﻿using RuntimeFactory;
-
-namespace DebuggerFactories
+﻿namespace RuntimeFactory.Sample
 {
     public static class CalculatorFactory
     {

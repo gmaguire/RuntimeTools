@@ -72,22 +72,29 @@ namespace RuntimeFactory
             // Note: using a fixed assembly name, which doesn't matter as long as we don't expect cross references of generated assemblies
             var compilation = Compilation.Create("AssemblyForRecompiledType", compilationOptions, new[] { syntaxTree }, references);
 
-            var stream = new MemoryStream();
-            var emitResult = compilation.Emit(stream);
-
-            if (!emitResult.Success)
+            using (var stream = new MemoryStream())
             {
-                Trace.WriteLine("ERROR: Compilation Failed!");
-                foreach (var diag in emitResult.Diagnostics)
-                {
-                    var message = string.Format("[{0}] {1}", diag.Location.GetLineSpan(false),
-                                                diag.Info.GetMessage());
-                    Trace.WriteLine(message);
-                }
-                return _concreteType;
-            }
+                var emitResult = compilation.Emit(stream);
 
-            return Assembly.Load(stream.GetBuffer()).GetTypes().First(t => t.Name.Equals(newClassName));
+                if (!emitResult.Success)
+                {
+                    TraceCompilaitionDiagnostics(emitResult);
+                    return _concreteType;
+                }
+
+                return Assembly.Load(stream.GetBuffer()).GetTypes().FirstOrDefault();
+            }
+        }
+
+        private static void TraceCompilaitionDiagnostics(EmitResult emitResult)
+        {
+            Trace.WriteLine("ERROR: Compilation Failed!");
+            foreach (var diag in emitResult.Diagnostics)
+            {
+                var message = string.Format("[{0}] {1}", diag.Location.GetLineSpan(false),
+                                            diag.Info.GetMessage());
+                Trace.WriteLine(message);
+            }
         }
 
         private static string ChangeConcreteClassName(string code, string className, string newClassName)

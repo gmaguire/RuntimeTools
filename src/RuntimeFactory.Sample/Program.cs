@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace DebuggerFactories
+namespace RuntimeFactory.Sample
 {
     class Program
     {
@@ -21,7 +21,6 @@ namespace DebuggerFactories
                 Console.WriteLine(e.ToString());
                 Console.Read();
             }
-      
         }
     }
 }
