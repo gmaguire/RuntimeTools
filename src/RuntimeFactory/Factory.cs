@@ -43,11 +43,18 @@ namespace RuntimeFactory
             {
                 try
                 {
+                    watcher.EnableRaisingEvents = false;
+                    Trace.WriteLine(string.Format("Modification detected in file '{0}', starting recompilation...", e.Name));
                     _recompiledType = CompileCode(e.FullPath, className);
                 }
                 catch (Exception ex)
                 {
                     Trace.WriteLine(ex);
+                }
+                finally
+                {
+                    Trace.WriteLine("Compilation finished.");
+                    watcher.EnableRaisingEvents = true;
                 }
             };
         }
@@ -61,11 +68,7 @@ namespace RuntimeFactory
 
             RenameClass(syntaxTree, className, newClassName);
 
-            var references = new List<AssemblyFileReference>
-                                 {
-                                     new AssemblyFileReference(_concreteType.Assembly.Location),
-                                     new AssemblyFileReference(typeof (object).Assembly.Location)
-                                 };
+            var references = GetAssemblyReferencesForConcreteType();
 
             var compilationOptions = new CompilationOptions(assemblyKind: AssemblyKind.DynamicallyLinkedLibrary);
 
@@ -84,6 +87,19 @@ namespace RuntimeFactory
 
                 return Assembly.Load(stream.GetBuffer()).GetTypes().FirstOrDefault();
             }
+        }
+
+        private static IEnumerable<AssemblyFileReference> GetAssemblyReferencesForConcreteType()
+        {
+            var references = _concreteType.Assembly
+                .GetReferencedAssemblies()
+                .Select(Assembly.Load)
+                .Select(referencedAssembly => new AssemblyFileReference(referencedAssembly.Location))
+                .ToList();
+
+            references.Add(new AssemblyFileReference(_concreteType.Assembly.Location));
+
+            return references;
         }
 
         private static void TraceCompilaitionDiagnostics(EmitResult emitResult)
