@@ -10,7 +10,7 @@ using Roslyn.Compilers.CSharp;
 namespace RuntimeFactory
 {
     public static class Factory<TInterface, TConcrete>
-        where TConcrete : TInterface, new()
+        where TConcrete : TInterface
     {
         private static Type _recompiledType;
         private static readonly Type _concreteType;
@@ -21,9 +21,9 @@ namespace RuntimeFactory
             WatchCodeFile();
         }
 
-        public static TInterface Create()
+        public static TInterface Create(params object[] arguments)
         {
-            return (TInterface)Activator.CreateInstance(_recompiledType ?? _concreteType);
+            return (TInterface)Activator.CreateInstance(_recompiledType ?? _concreteType, arguments);
         }
 
         private static void WatchCodeFile()
@@ -59,7 +59,7 @@ namespace RuntimeFactory
 
             var syntaxTree = SyntaxTree.ParseCompilationUnit(code);
 
-            ChangeConcreteClassName(syntaxTree, className, newClassName);
+            RenameClass(syntaxTree, className, newClassName);
 
             var references = new List<AssemblyFileReference>
                                  {
@@ -97,7 +97,7 @@ namespace RuntimeFactory
             }
         }
 
-        private static void ChangeConcreteClassName(SyntaxTree syntaxTree, string className, string newClassName)
+        private static void RenameClass(SyntaxTree syntaxTree, string className, string newClassName)
         {
             var classNode = syntaxTree.Root
                                         .DescendentNodes()
