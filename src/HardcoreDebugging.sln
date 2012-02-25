@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HardcoreDebugging.Sample", "RuntimeFactory.Sample\HardcoreDebugging.Sample.csproj", "{D422430B-92D9-4696-B838-14A426F5DEDA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HardcoreDebugging.Sample", "HardcoreDebugging.Sample\HardcoreDebugging.Sample.csproj", "{D422430B-92D9-4696-B838-14A426F5DEDA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{02717881-FC9A-4D29-A44D-CBE762061352}"
 	ProjectSection(SolutionItems) = preProject
@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{027178
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HardcoreDebugging", "RuntimeFactory\HardcoreDebugging.csproj", "{2AE1FCB5-18E6-4C98-9BA4-B6A9795A2439}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HardcoreDebugging", "HardcoreDebugging\HardcoreDebugging.csproj", "{2AE1FCB5-18E6-4C98-9BA4-B6A9795A2439}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

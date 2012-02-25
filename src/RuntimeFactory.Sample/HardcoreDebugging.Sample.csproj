@@ -52,7 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RuntimeFactory\HardcoreDebugging.csproj">
+    <ProjectReference Include="..\HardcoreDebugging\HardcoreDebugging.csproj">
       <Project>{2AE1FCB5-18E6-4C98-9BA4-B6A9795A2439}</Project>
       <Name>HardcoreDebugging</Name>
     </ProjectReference>
