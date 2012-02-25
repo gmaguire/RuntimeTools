@@ -7,7 +7,7 @@ using System.Reflection;
 using Roslyn.Compilers;
 using Roslyn.Compilers.CSharp;
 
-namespace RuntimeFactory
+namespace HardcoreDebugging
 {
     public static class Factory<TInterface, TConcrete>
         where TConcrete : TInterface

@@ -1,4 +1,4 @@
-﻿namespace RuntimeFactory.Sample
+﻿namespace HardcoreDebugging.Sample
 {
     public static class CalculatorFactory
     {

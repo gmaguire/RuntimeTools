@@ -1,4 +1,4 @@
-﻿namespace RuntimeFactory.Sample
+﻿namespace HardcoreDebugging.Sample
 {
     internal class Calculator : ICalculator
     {
