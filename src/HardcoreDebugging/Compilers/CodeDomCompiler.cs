@@ -57,6 +57,8 @@ namespace HardcoreDebugging.Compilers
                                     .Select(a => Path.GetFileName(a.Location))
                                     .ToList();
 
+            assemblyNames.Add("System.dll");
+
             assemblyNames.Add(Path.GetFileName(type.Assembly.Location));
 
             return assemblyNames.ToArray();

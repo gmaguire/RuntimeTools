@@ -1,10 +1,12 @@
-﻿namespace HardcoreDebugging.Sample
+﻿using System.Dynamic;
+
+namespace HardcoreDebugging.Sample
 {
     internal class Calculator : ICalculator
     {
         public int Sum(int a, int b)
         {
-            return a + b ;
+            return a + b;
         }
     }
 }
