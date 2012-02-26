@@ -66,11 +66,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeWatcher.cs" />
     <Compile Include="Compilers\BaseCompiler.cs" />
     <Compile Include="Compilers\CodeDomCompiler.cs" />
     <Compile Include="Compilers\ICompiler.cs" />
     <Compile Include="Compilers\RoslynCompiler.cs" />
-    <Compile Include="Factory.cs" />
+    <Compile Include="DynamicActivator.cs" />
+    <Compile Include="ICodeWatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

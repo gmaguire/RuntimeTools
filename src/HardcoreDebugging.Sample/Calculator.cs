@@ -1,6 +1,4 @@
-﻿using System.Dynamic;
-
-namespace HardcoreDebugging.Sample
+﻿namespace HardcoreDebugging.Sample
 {
     internal class Calculator : ICalculator
     {

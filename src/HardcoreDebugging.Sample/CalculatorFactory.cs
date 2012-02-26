@@ -5,7 +5,7 @@
         public static ICalculator Create()
         {
         #if DEBUG
-            return Factory<ICalculator, Calculator>.Create();
+            return DynamicActivator<ICalculator, Calculator>.CreateInstance();
         #else
             return new Calculator();
         #endif
