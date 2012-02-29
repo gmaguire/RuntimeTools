@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 
@@ -8,8 +9,7 @@ namespace HardcoreDebugging
     {
         public void Start(Type concreteType, Action<string> modificationAction)
         {
-            var pathToWatch = Path.Combine(
-                                    Path.GetDirectoryName(concreteType.Assembly.Location) ??  "", @"..\..");
+            var pathToWatch = GetPathToWatch(concreteType);
 
             var className = concreteType.Name;
 
@@ -39,6 +39,16 @@ namespace HardcoreDebugging
                                            watcher.EnableRaisingEvents = true;
                                        }
                                    };
+        }
+
+        private static string GetPathToWatch(Type concreteType)
+        {
+            var configPath = ConfigurationManager.AppSettings["DynamicActivatorCodePath"];
+
+            if (!string.IsNullOrWhiteSpace(configPath))
+                return configPath;
+
+            return Path.Combine(Path.GetDirectoryName(concreteType.Assembly.Location) ?? "", @"..\..");
         }
     }
 }
