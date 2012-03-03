@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HardcoreDebugging.Compilers
+namespace RuntimeTools.Compilers
 {
     public interface ICompiler
     {

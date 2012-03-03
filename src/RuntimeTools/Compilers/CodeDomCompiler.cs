@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace HardcoreDebugging.Compilers
+namespace RuntimeTools.Compilers
 {
     public class CodeDomCompiler : BaseCompiler, ICompiler
     {

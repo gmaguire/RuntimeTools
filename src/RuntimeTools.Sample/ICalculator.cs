@@ -1,4 +1,4 @@
-﻿namespace HardcoreDebugging.Sample
+﻿namespace RuntimeTools.Sample
 {
     public interface ICalculator
     {

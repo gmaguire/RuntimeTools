@@ -1,7 +1,7 @@
 ﻿using System;
-using HardcoreDebugging.Compilers;
+using RuntimeTools.Compilers;
 
-namespace HardcoreDebugging
+namespace RuntimeTools
 {
     public static class DynamicActivator<TInterface, TConcrete>
         where TConcrete : TInterface

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace HardcoreDebugging.Sample
+namespace RuntimeTools.Sample
 {
     class Program
     {

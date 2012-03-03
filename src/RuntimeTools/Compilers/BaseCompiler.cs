@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace HardcoreDebugging.Compilers
+namespace RuntimeTools.Compilers
 {
     public abstract class BaseCompiler
     {

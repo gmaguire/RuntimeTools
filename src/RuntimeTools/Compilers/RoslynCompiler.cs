@@ -7,7 +7,7 @@ using System.Reflection;
 using Roslyn.Compilers;
 using Roslyn.Compilers.CSharp;
 
-namespace HardcoreDebugging.Compilers
+namespace RuntimeTools.Compilers
 {
     public class RoslynCompiler : BaseCompiler, ICompiler
     {

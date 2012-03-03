@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 
-namespace HardcoreDebugging
+namespace RuntimeTools
 {
     public class CodeWatcher: ICodeWatcher
     {
